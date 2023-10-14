@@ -1,8 +1,17 @@
+import Link from "next/link";
+import { redirect } from "next/navigation";
+
 import { ModeToggle } from "@/components/ModeToggle";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { currentProfile } from "@/lib/currentProfile";
 
-export default function Home() {
+export default async function Home() {
+  const user = await currentProfile();
+
+  if (user) {
+    redirect("/app");
+  }
+
   return (
     <div className="flex items-center justify-center h-full flex-col">
       <h1 className="text-5xl text-center text-primary font-bold">
