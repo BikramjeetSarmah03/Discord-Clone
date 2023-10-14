@@ -21,7 +21,7 @@ export default function NavigationItem({
   const router = useRouter();
 
   const onClick = () => {
-    router.push(`/servers/${id}`);
+    router.push(`/app/servers/${id}`);
   };
 
   return (
