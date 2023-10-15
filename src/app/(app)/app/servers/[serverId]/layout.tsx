@@ -1,3 +1,4 @@
+import ServerSidebar from "@/components/server/ServerSidebar";
 import { currentProfile } from "@/lib/currentProfile";
 import { db } from "@/lib/db";
 import { redirectToSignIn } from "@clerk/nextjs";
@@ -36,7 +37,7 @@ export default async function SinglePageLayout({ children, params }: Props) {
   return (
     <div className="h-full">
       <div className="hidden md:flex h-full w-60 z-20 flex-col inset-y-0 fixed">
-        Channels
+        <ServerSidebar serverId={server.id} />
       </div>
 
       <main className="h-full md:pl-60">{children}</main>
