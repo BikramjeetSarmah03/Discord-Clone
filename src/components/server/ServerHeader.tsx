@@ -41,18 +41,20 @@ export default function ServerHeader({ server, role }: Props) {
         </button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent
-        className="w-56 text-xs font-medium text-black dark:text-neutral-400 space-y-[2px]"
-        onClick={() => onOpen("invite", { server })}>
+      <DropdownMenuContent className="w-56 text-xs font-medium text-black dark:text-neutral-400 space-y-[2px]">
         {isModerator && (
-          <DropdownMenuItem className="text-indigo-600 dark:text-indigo-400 px-3 py-2 text-sm cursor-pointer">
+          <DropdownMenuItem
+            className="text-indigo-600 dark:text-indigo-400 px-3 py-2 text-sm cursor-pointer"
+            onClick={() => onOpen("invite", { server })}>
             Invite People
             <UserPlus className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
 
         {isAdmin && (
-          <DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer">
+          <DropdownMenuItem
+            className="px-3 py-2 text-sm cursor-pointer"
+            onClick={() => onOpen("editServer", { server })}>
             Server Settings
             <Settings className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
