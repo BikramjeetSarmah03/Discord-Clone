@@ -15,7 +15,7 @@ import { useModal } from "@/hooks/useModalStore";
 import { useRouter } from "next/navigation";
 
 export default function LeaveServerModal() {
-  const { isOpen, onClose, type, data, onOpen } = useModal();
+  const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
