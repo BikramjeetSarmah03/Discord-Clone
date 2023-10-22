@@ -5,6 +5,7 @@ import { currentProfile } from "@/lib/currentProfile";
 import { db } from "@/lib/db";
 
 import ChatHeader from "@/components/chat/ChatHeader";
+import ChatInput from "@/components/chat/ChatInput";
 
 interface Props {
   params: {
@@ -41,6 +42,18 @@ export default async function ChannelIdPage({
         serverId={channel.serverId}
         name={channel.name}
         type={"channel"}
+      />
+
+      <div className="flex-1">Future Messages</div>
+
+      <ChatInput
+        name={channel.name}
+        type="channel"
+        apiUrl="/api/socket/messages"
+        query={{
+          channelId: channel.id,
+          serverId: channel.serverId,
+        }}
       />
     </div>
   );
