@@ -9,14 +9,15 @@ import { useEffect, useState } from "react";
 import { Member, MemberRole, Profile } from "@prisma/client";
 import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash } from "lucide-react";
 import Image from "next/image";
+import { useRouter, useParams } from "next/navigation";
 
 import { cn } from "@/lib/utils";
+import { useModal } from "@/hooks/useModalStore";
 import UserAvatar from "@/components/UserAvatar";
 import ActionTooltip from "@/components/ActionTooltip";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useModal } from "@/hooks/useModalStore";
 
 interface ChatItemProps {
   id: string;
@@ -56,6 +57,8 @@ export default function ChatItem({
   socketUrl,
 }: ChatItemProps) {
   const [isEditing, setIsEditing] = useState(false);
+  const router = useRouter();
+  const params = useParams();
 
   const { onOpen } = useModal();
 
@@ -112,10 +115,18 @@ export default function ChatItem({
     }
   };
 
+  const onMemberClick = () => {
+    if (member.id === currentMember.id) return;
+
+    router.push(`/app/servers/${params?.serverId}/conversations/${member.id}`);
+  };
+
   return (
     <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
       <div className="group flex gap-x-2 items-start w-full">
-        <div className="cursor-pointer hover:drop-shadow-md transition">
+        <div
+          onClick={onMemberClick}
+          className="cursor-pointer hover:drop-shadow-md transition">
           <UserAvatar src={member.profile.imageUrl} />
         </div>
         <div className="flex flex-col w-full">
