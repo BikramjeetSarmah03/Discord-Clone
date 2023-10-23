@@ -8,6 +8,7 @@ import ModalProvider from "@/providers/modal-provider";
 
 import { cn } from "@/lib/utils";
 import SocketProvider from "@/providers/socket-provider";
+import QueryProvider from "@/providers/query-provider";
 
 const font = Open_Sans({ subsets: ["latin"] });
 
@@ -33,7 +34,7 @@ export default function RootLayout({
             storageKey="chatter-box-theme">
             <SocketProvider>
               <ModalProvider />
-              {children}
+              <QueryProvider>{children}</QueryProvider>
             </SocketProvider>
           </ThemeProvider>
         </body>
