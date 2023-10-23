@@ -164,7 +164,10 @@ export default function EditChannelModal() {
             </div>
 
             <DialogFooter className="bg-gray-100 px-6 py-4">
-              <Button variant={"primary"} disabled={isLoading}>
+              <Button
+                variant={"primary"}
+                disabled={isLoading}
+                className="w-full">
                 Save
               </Button>
             </DialogFooter>
