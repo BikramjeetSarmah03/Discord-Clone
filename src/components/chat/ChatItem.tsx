@@ -31,7 +31,7 @@ interface ChatItemProps {
   currentMember: Member;
   isUpdated: boolean;
   socketUrl: string;
-  sockerQuery: Record<string, string>;
+  socketQuery: Record<string, string>;
 }
 
 const roleIconMap = {
@@ -53,7 +53,7 @@ export default function ChatItem({
   currentMember,
   deleted,
   isUpdated,
-  sockerQuery,
+  socketQuery,
   socketUrl,
 }: ChatItemProps) {
   const [isEditing, setIsEditing] = useState(false);
@@ -103,7 +103,7 @@ export default function ChatItem({
     try {
       const url = qs.stringifyUrl({
         url: `${socketUrl}/${id}`,
-        query: sockerQuery,
+        query: socketQuery,
       });
 
       await axios.patch(url, values);
@@ -241,7 +241,7 @@ export default function ChatItem({
               onClick={() =>
                 onOpen("deleteMessage", {
                   apiUrl: `${socketUrl}/${id}`,
-                  query: sockerQuery,
+                  query: socketQuery,
                 })
               }
             />

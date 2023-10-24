@@ -21,33 +21,6 @@ export const useChatSocket = ({
   useEffect(() => {
     if (!socket) return;
 
-    socket.on(updateKey, (message: MessageWithMemberWithProfile) => {
-      queryClient.setQueryData([queryKey], (oldData: any) => {
-        if (!oldData || !oldData.pages || oldData.pages.length === 0) {
-          return oldData;
-        }
-
-        const newData = oldData.pages.map((page: any) => {
-          return {
-            ...page,
-            items: page.items.map((item: MessageWithMemberWithProfile) => {
-              if (item.id === message.id) {
-                console.log("message returned: ", message);
-                return message;
-              }
-
-              return item;
-            }),
-          };
-        });
-
-        return {
-          ...oldData,
-          pages: newData,
-        };
-      });
-    });
-
     socket.on(addKey, (message: MessageWithMemberWithProfile) => {
       queryClient.setQueryData([queryKey], (oldData: any) => {
         if (!oldData || !oldData.pages || oldData.pages.length === 0) {
@@ -78,5 +51,39 @@ export const useChatSocket = ({
       socket.off(addKey);
       socket.off(updateKey);
     };
-  }, [queryClient, addKey, queryKey, socket, updateKey]);
+  }, [queryClient, addKey, queryKey, socket]);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on(updateKey, (message: MessageWithMemberWithProfile) =>
+      queryClient.setQueryData([queryKey], (oldData: any) => {
+        if (!oldData || !oldData?.pages || oldData?.pages?.length === 0) {
+          return oldData;
+        }
+
+        const newData = oldData.pages.map((page: any) => {
+          return {
+            ...page,
+            items: page.items.map((item: MessageWithMemberWithProfile) => {
+              if (item.id === message.id) {
+                return message;
+              }
+
+              return item;
+            }),
+          };
+        });
+
+        return {
+          ...oldData,
+          pages: newData,
+        };
+      })
+    );
+
+    return () => {
+      socket.off(updateKey);
+    };
+  }, [queryClient, updateKey, queryKey, socket]);
 };
