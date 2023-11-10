@@ -16,7 +16,7 @@ export default async function Home() {
   return (
     <div className="flex justify-between flex-col min-h-screen">
       <div className="flex p-4 items-center justify-between ">
-        <h1 className="font-bold font-serif">Chatter Box</h1>
+        <h1 className="font-bold font-serif">Discord Clone</h1>
         <div className=" flex items-center space-x-4">
           <div className="border rounded-lg dark:border-white/40">
             <ModeToggle />
@@ -34,7 +34,7 @@ export default async function Home() {
         </p>
 
         <h3 className="text-4xl font-semibold mt-4">
-          <span className="font-serif">Chatter Box</span> is the place
+          <span className="font-serif">Discord</span> is the place
         </h3>
       </section>
 
@@ -48,7 +48,7 @@ export default async function Home() {
         </Link>
 
         <Link
-          href={"https://github.com/bikramjeetSarmah03/chatter-box"}
+          href={"https://github.com/BikramjeetSarmah03/Discord-Clone"}
           target="_blank">
           <Github />
         </Link>
